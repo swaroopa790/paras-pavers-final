@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paras Pavers | Premium Factory Halondi</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #1e293b;
+}
+
+h1, h2, h3, .heading-font {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+:root {
+    --primary: #0f172a;
+    --accent: #c9a24d;
+}
+
+.hero-section {
+    background: linear-gradient(rgba(15,23,42,0.88), rgba(15,23,42,0.88)),
+                url('https://images.unsplash.com/photo-1590483734743-306917756f11?q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+}
+
+.custom-button {
+    background-color: var(--accent);
+    color: #0f172a;
+    padding: 12px 32px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+}
+
+.custom-button:hover {
+    background-color: #b89642;
+    transform: translateY(-2px);
+}
+
+.custom-button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.custom-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.product-card {
+    background: #f8fafc;
+    border-bottom: 3px solid var(--accent);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.img-container {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: #0f172a;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.star-btn {
+    font-size: 22px;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: color 0.15s ease, transform 0.1s ease;
+    background: none;
+    border: none;
+    padding: 2px;
+}
+.star-btn:hover, .star-btn.active { color: var(--accent); transform: scale(1.08); }
+
+.star-display { color: var(--accent); letter-spacing: 2px; }
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Mobile nav */
+#mobileMenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+#mobileMenu.open { max-height: 400px; }
+
+/* Modal */
+.modal-overlay {
+    position: fixed; inset: 0; background: rgba(15,23,42,0.7);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100; padding: 16px;
+}
+
+@media (min-width: 768px) {
+    body { font-size: 15px; }
+}
+
+.toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: #0f172a; color: #fff; padding: 12px 24px; border-radius: 4px;
+    font-size: 13px; z-index: 200; border-left: 3px solid var(--accent);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+.toast.error { border-left-color: #ef4444; }
+
+.spinner {
+    display: inline-block; width: 16px; height: 16px;
+    border: 2px solid rgba(15,23,42,0.3); border-top-color: #0f172a;
+    border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+html { scroll-behavior: smooth; }
+</style>
+</head>
+
+<body class="bg-[#f1f5f9]">
+
+<!-- NAVBAR -->
+<nav class="fixed w-full z-50 bg-white/95 shadow-md">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <div class="text-xl heading-font text-[#0f172a]">
+            PARAS <span class="text-[#c9a24d]">PAVERS</span>
+        </div>
+
+        <div class="hidden md:flex space-x-6 items-center text-xs uppercase font-semibold text-gray-600">
+            <a href="#products" class="hover:text-black">Catalog</a>
+            <a href="#calculator" class="hover:text-black">Calculator</a>
+            <a href="#contact" class="hover:text-black">Visit Factory</a>
+
+            <a href="https://www.instagram.com/paraspavers" target="_blank" rel="noopener"
+               class="flex items-center gap-1 text-pink-600 hover:text-black transition normal-case">
+                <i class="fab fa-instagram"></i> @paraspavers
+            </a>
+
+            <a href="tel:+917058679999" class="custom-button rounded-sm">Call</a>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button id="menuBtn" aria-label="Toggle navigation menu" aria-expanded="false"
+                class="md:hidden text-2xl text-[#0f172a] p-2 -mr-2">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden bg-white border-t px-6">
+        <div class="flex flex-col py-3 space-y-3 text-xs uppercase font-semibold text-gray-600">
+            <a href="#products" class="py-2">Catalog</a>
+            <a href="#calculator" class="py-2">Calculator</a>
+            <a href="#contact" class="py-2">Visit Factory</a>
+            <a href="https://www.instagram.com/paraspavers" target="_blank" rel="noopener" class="py-2 text-pink-600 normal-case">
+                <i class="fab fa-instagram"></i> @paraspavers
+            </a>
+            <a href="tel:+917058679999" class="custom-button rounded-sm text-center">Call</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section min-h-[85vh] flex items-center pt-20 md:pt-0">
+    <div class="container mx-auto px-6">
+        <span class="text-[#c9a24d] uppercase tracking-widest text-xs font-semibold">
+            Est. 2022 | Halondi, Kolhapur
+        </span>
+
+        <h1 class="text-3xl sm:text-4xl md:text-6xl text-white mt-4 mb-6">
+            Strong Concrete <br>
+            Crafted with Precision
+        </h1>
+
+        <p class="text-gray-300 max-w-xl text-sm mb-8">
+            Premium paving blocks for industrial roads and modern residential landscapes,
+            manufactured with consistency and quality control.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+            <a href="https://wa.me/917066909899" class="custom-button rounded-sm">
+                Inquire on WhatsApp
+            </a>
+            <a href="#calculator" class="custom-button rounded-sm bg-transparent border border-[#c9a24d] text-[#c9a24d] hover:bg-[#c9a24d] hover:text-[#0f172a]">
+                Calculate Required Pavers
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="py-16 md:py-20 bg-[#0f172a]">
+    <div class="text-center mb-12 px-6">
+        <h2 class="text-2xl md:text-3xl text-white mb-2">Our Products</h2>
+        <p class="text-gray-400 text-xs uppercase tracking-widest">Built for durability</p>
+    </div>
+
+    <div id="productGrid" class="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Product cards are rendered here by main.js (falls back to static cards if API is unreachable) -->
+    </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="calculator" class="py-16 md:py-20 bg-[#f1f5f9]">
+    <div class="container mx-auto px-6 max-w-3xl">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl mb-2">AI Paver Quantity Calculator</h2>
+            <p class="text-gray-500 text-xs uppercase tracking-widest">Estimate blocks &amp; brass required for your land</p>
+        </div>
+
+        <form id="calcForm" class="bg-white rounded shadow p-6 md:p-10 border-b-[3px] border-[#c9a24d]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                    <label for="landLength" class="block text-xs uppercase font-semibold text-gray-600 mb-1">Land Length</label>
+                    <input required type="number" min="0.01" step="any" id="landLength" name="landLength"
+                        class="w-full border border-gray-300 rounded px-3 py-3 text-sm" placeholder="e.g. 50">
+                </div>
+                <div>
+                    <label for="landWidth" class="block text-xs uppercase font-semibold text-gray-600 mb-1">Land Width</label>
+                    <input required type="number" min="0.01" step="any" id="landWidth" name="landWidth"
+                        class="w-full border border-gray-300 rounded px-3 py-3 text-sm" placeholder="e.g. 30">
+                </div>
+                <div>
+                    <label for="unit" class="block text-xs uppercase font-semibold text-gray-600 mb-1">Unit</label>
+                    <select id="unit" name="unit" class="w-full border border-gray-300 rounded px-3 py-3 text-sm bg-white">
+                        <option value="ft">Feet</option>
+                        <option value="m">Meter</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="productSelect" class="block text-xs uppercase font-semibold text-gray-600 mb-1">Paver / Block Type</label>
+                    <select id="productSelect" name="productSelect" class="w-full border border-gray-300 rounded px-3 py-3 text-sm bg-white">
+                        <option value="">Custom size</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="blockLength" class="block text-xs uppercase font-semibold text-gray-600 mb-1">Block Length (mm)</label>
+                    <input required type="number" min="1" step="any" id="blockLength" name="blockLength"
+                        class="w-full border border-gray-300 rounded px-3 py-3 text-sm" placeholder="e.g. 200">
+                </div>
+                <div>
+                    <label for="blockWidth" class="block text-xs uppercase font-semibold text-gray-600 mb-1">Block Width (mm)</label>
+                    <input required type="number" min="1" step="any" id="blockWidth" name="blockWidth"
+                        class="w-full border border-gray-300 rounded px-3 py-3 text-sm" placeholder="e.g. 100">
+                </div>
+                <div>
+                    <label for="wastage" class="block text-xs uppercase font-semibold text-gray-600 mb-1">Wastage % (optional)</label>
+                    <input type="number" min="0" max="100" step="any" id="wastage" name="wastage"
+                        class="w-full border border-gray-300 rounded px-3 py-3 text-sm" placeholder="e.g. 5" value="5">
+                </div>
+                <div>
+                    <label for="depth" class="block text-xs uppercase font-semibold text-gray-600 mb-1">
+                        Base/Material Depth — inches (optional, for brass estimate)
+                    </label>
+                    <input type="number" min="0" step="any" id="depth" name="depth"
+                        class="w-full border border-gray-300 rounded px-3 py-3 text-sm" placeholder="e.g. 4">
+                </div>
+            </div>
+
+            <p id="calcFormError" class="text-red-600 text-xs mt-4 hidden"></p>
+
+            <button type="submit" id="calcSubmitBtn" class="custom-button rounded-sm mt-6 w-full sm:w-auto flex items-center justify-center gap-2">
+                <span id="calcSubmitLabel">Calculate</span>
+            </button>
+        </form>
+
+        <!-- Result card -->
+        <div id="calcResult" class="hidden bg-[#0f172a] text-white rounded mt-8 p-6 md:p-10 border-b-[3px] border-[#c9a24d]">
+            <h3 class="heading-font text-lg mb-6 text-[#c9a24d]">Estimated Requirement</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm mb-6">
+                <div>
+                    <p class="text-gray-400 text-xs uppercase mb-1">Land Area</p>
+                    <p id="resLandArea" class="text-lg font-semibold"></p>
+                </div>
+                <div>
+                    <p class="text-gray-400 text-xs uppercase mb-1">Basic Blocks</p>
+                    <p id="resBasicBlocks" class="text-lg font-semibold"></p>
+                </div>
+                <div>
+                    <p class="text-gray-400 text-xs uppercase mb-1">With Wastage</p>
+                    <p id="resRecommended" class="text-lg font-semibold text-[#c9a24d]"></p>
+                </div>
+                <div id="resVolumeWrap" class="hidden">
+                    <p class="text-gray-400 text-xs uppercase mb-1">Estimated Volume</p>
+                    <p id="resVolume" class="text-lg font-semibold"></p>
+                </div>
+                <div id="resBrassWrap" class="hidden">
+                    <p class="text-gray-400 text-xs uppercase mb-1">Approx. Brass</p>
+                    <p id="resBrass" class="text-lg font-semibold text-[#c9a24d]"></p>
+                </div>
+            </div>
+
+            <p id="aiMessage" class="text-gray-300 text-sm mb-6 leading-relaxed"></p>
+
+            <p class="text-gray-500 text-xs mb-6 italic">
+                Final material quantity may vary depending on site conditions, laying pattern, joint spacing,
+                base preparation and wastage. Please confirm with the Paras Pavers team before ordering.
+            </p>
+
+            <a id="whatsappResultBtn" href="#" target="_blank" rel="noopener" class="custom-button rounded-sm inline-flex items-center gap-2">
+                <i class="fab fa-whatsapp"></i> Ask on WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT & LOCATION -->
+<section id="contact" class="py-16 md:py-20 bg-white">
+    <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+
+        <div>
+            <h2 class="text-2xl md:text-3xl mb-6">Visit Our Factory</h2>
+
+            <p class="text-sm mb-3"><strong>Owner:</strong> Nikhil Dand</p>
+            <p class="text-sm mb-3"><strong>Phone:</strong> +91 7066909899</p>
+
+            <p class="text-sm mb-3">
+                <strong>Instagram:</strong>
+                <a href="https://www.instagram.com/paraspavers" target="_blank" rel="noopener"
+                   class="text-pink-600 font-semibold hover:underline">
+                    @paraspavers
+                </a>
+            </p>
+
+            <p class="text-sm mb-4">
+                <strong>Factory Location:</strong><br>
+                Near Chandraprabha Vastram,<br>
+                Halondi, Tal-Hatkanangle,<br>
+                Dist-Kolhapur, Maharashtra
+            </p>
+
+            <a href="https://wa.me/917066909899" class="text-green-600 text-2xl inline-block p-2 -ml-2" aria-label="Chat on WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="w-full h-[300px] md:h-[380px] border rounded shadow overflow-hidden bg-[#f1f5f9] flex flex-col items-center justify-center p-6 text-center">
+            <i class="fas fa-map-marker-alt text-4xl text-[#c9a24d] mb-4"></i>
+            <p class="text-sm text-gray-600 mb-4">
+                Near Chandraprabha Vastram,<br>
+                Halondi, Tal-Hatkanangle,<br>
+                Dist-Kolhapur, Maharashtra
+            </p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Paras+Pavers+Halondi+Kolhapur+Maharashtra"
+               target="_blank"
+               rel="noopener"
+               class="custom-button rounded-sm inline-flex items-center gap-2">
+                <i class="fas fa-directions"></i> Open in Google Maps
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#0f172a] text-gray-400 py-6 text-center text-xs px-4">
+    © 2026 Paras Pavers Factory | Halondi, Kolhapur | Instagram: @paraspavers
+</footer>
+
+<!-- Rating modal (populated dynamically) -->
+<div id="ratingModalOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="ratingModalTitle">
+    <div class="bg-white rounded max-w-md w-full p-6 relative border-b-[3px] border-[#c9a24d]">
+        <button id="closeModalBtn" aria-label="Close" class="absolute top-3 right-3 text-gray-400 hover:text-gray-800 text-xl p-2">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3 id="ratingModalTitle" class="heading-font text-lg mb-1">Rate this product</h3>
+        <p id="ratingModalProduct" class="text-sm text-gray-500 mb-5"></p>
+
+        <form id="ratingForm">
+            <div class="mb-4">
+                <label class="block text-xs uppercase font-semibold text-gray-600 mb-2">Your Rating</label>
+                <div id="starPicker" class="flex gap-1" role="radiogroup" aria-label="Star rating">
+                    <button type="button" class="star-btn" data-star="1" aria-label="1 star"><i class="fas fa-star"></i></button>
+                    <button type="button" class="star-btn" data-star="2" aria-label="2 stars"><i class="fas fa-star"></i></button>
+                    <button type="button" class="star-btn" data-star="3" aria-label="3 stars"><i class="fas fa-star"></i></button>
+                    <button type="button" class="star-btn" data-star="4" aria-label="4 stars"><i class="fas fa-star"></i></button>
+                    <button type="button" class="star-btn" data-star="5" aria-label="5 stars"><i class="fas fa-star"></i></button>
+                </div>
+                <input type="hidden" id="ratingValue" value="0">
+            </div>
+
+            <div class="mb-4">
+                <label for="reviewerName" class="block text-xs uppercase font-semibold text-gray-600 mb-1">Your Name (optional)</label>
+                <input type="text" id="reviewerName" maxlength="100" class="w-full border border-gray-300 rounded px-3 py-3 text-sm" placeholder="e.g. Rahul Patil">
+            </div>
+
+            <div class="mb-5">
+                <label for="reviewText" class="block text-xs uppercase font-semibold text-gray-600 mb-1">Review (optional)</label>
+                <textarea id="reviewText" maxlength="1000" rows="3" class="w-full border border-gray-300 rounded px-3 py-3 text-sm"
+                    placeholder="Share your experience..."></textarea>
+            </div>
+
+            <p id="ratingFormError" class="text-red-600 text-xs mb-3 hidden"></p>
+
+            <button type="submit" id="ratingSubmitBtn" class="custom-button rounded-sm w-full flex items-center justify-center gap-2">
+                <span>Submit Rating</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
